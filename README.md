@@ -1,1 +1,1 @@
-# mobX-React-TypeScript-customPagination-
+# mobX-React-TypeScript-customPagination
