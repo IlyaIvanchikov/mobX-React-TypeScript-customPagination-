@@ -1,10 +1,24 @@
 import React from 'react';
-import './App.css';
+import classes from './app.module.scss';
+import Main from './components/main/main';
 
 function App() {
   return (
-    <div className="App">
-      <p>Hello</p>
+    <div className={classes.wrapper}>
+      <header>
+        <h1
+          style={{
+            color: 'brown',
+            fontSize: '48px',
+          }}
+        >
+          Краш тест
+        </h1>
+      </header>
+      <Main />
+      <footer>
+        <span>Авторские права by Ilya Ivanchikov</span>
+      </footer>
     </div>
   );
 }

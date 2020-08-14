@@ -1,0 +1,31 @@
+.wrapper {
+  flex: 1 0 auto;
+  align-items: flex-end;
+  justify-content: center;
+  display: flex;
+  position: relative;
+
+  div {
+    font-size: 2rem;
+    font-weight: bold;
+    height: 25%;
+    width: auto;
+    position: relative;
+    border-radius: 30px;
+    margin: 5px;
+    cursor: pointer;
+    box-shadow: -2px 2px 9px 1px rgb(10, 152, 247);
+  }
+  .pagination {
+    color: rgb(10, 152, 247);
+    border: 1px solid rgb(10, 152, 247);
+    padding: 10px;
+  }
+
+  .selectedPage {
+    background: yellow;
+    color: black;
+    border: 3px solid red;
+    padding: 8px;
+  }
+}
