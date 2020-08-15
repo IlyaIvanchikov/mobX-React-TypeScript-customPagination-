@@ -14,11 +14,11 @@ const Main: React.FC = () => {
   const currentPage = storePagination.currentPage;
   const portionSize = storePagination.portionSize;
   const [portionNumber, setPortionNumber] = useState<number>(1);
-  // const portionNumber = storePagination.portionNumber;
   const portionCount = Math.ceil(countItemPagination / portionSize);
-  const leftPortPageNumber = (portionNumber - 1) * portionSize - 1;
+  const leftPortPageNumber = (portionNumber - 1) * portionSize + 1;
   const rightPortPageNumber = portionNumber * portionSize;
-
+  console.log(portionSize, portionCount);
+  console.log(window.innerHeight);
   return (
     <div className={classes.wrapper}>
       {portionNumber > 1 && (
@@ -28,26 +28,13 @@ const Main: React.FC = () => {
             setPortionNumber(portionNumber - 1);
           }}
         >
-          left
+          {`left <`}
         </div>
       )}
-      {/* {namePage.map((item: string, index: number) => (
-        <div
-          className={
-            currentPage === index + 1
-              ? classes.selectedPage
-              : classes.pagination
-          }
-          key={Math.random() * index}
-          onClick={() => handleClickPagination(index + 1)}
-        >
-          {item}
-        </div>
-      ))} */}
       {namePage
         .filter(
           (item: string, index: number) =>
-            index >= leftPortPageNumber && index <= rightPortPageNumber
+            index + 1 >= leftPortPageNumber && index + 1 <= rightPortPageNumber
         )
         .map((item: string, index: number) => (
           <div
@@ -69,7 +56,7 @@ const Main: React.FC = () => {
             setPortionNumber(portionNumber + 1);
           }}
         >
-          right
+          {`right >`}
         </div>
       )}
     </div>
