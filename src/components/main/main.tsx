@@ -16,7 +16,6 @@ const Main: React.FC = () => {
   } = mainStore;
   const [size, setSize] = useState<number>(window.innerWidth);
   const [summarySize, setSummarySize] = useState<any>([]);
-  // const [filterItem, setFilterItem] = useState<any>([]);
   const namePage = storePagination.namePage;
   const currentPage = storePagination.currentPage;
   const portionSize = storePagination.portionSize;
@@ -44,13 +43,13 @@ const Main: React.FC = () => {
   };
 
   const limitPageCount = size / 2;
-
   const handleClickRight = () => {
-    if (currentPage === portionSize) {
+    const currentSign = Math.sign(countItemPagination - rightPortPageNumber);
+    if (currentPage === portionSize && currentSign !== 0) {
       setPortionNumber(portionNumber + 1);
       handleNextItem();
     } else if (
-      Math.sign(countItemPagination - rightPortPageNumber) === -1 &&
+      (currentSign === 0 || currentSign === -1) &&
       lastCountPagination === currentPage
     ) {
       setPortionNumber(1);
@@ -78,7 +77,7 @@ const Main: React.FC = () => {
     // console.log(lenArrItem, arrItem, summarySize);
     if (limitPageCount > summarySize + 250) {
       incrementPortionSize();
-    } else if (limitPageCount < summarySize + 50) {
+    } else if (limitPageCount < summarySize + 50 && portionSize > 1) {
       decrementPortionSize();
     }
   }, [size, portionSize]);
@@ -92,6 +91,9 @@ const Main: React.FC = () => {
     };
   }, [size]);
 
+  useEffect(() => {
+    
+  })
   const updateWidth = () => {
     setSize(window.innerWidth);
   };
