@@ -4,7 +4,6 @@ import { createContext } from 'react';
 export interface IStore {
   currentPage: number;
   portionSize: number;
-  // portionNumber: number;
   namePage: string[];
 }
 
@@ -31,12 +30,34 @@ class MainStore {
       'seventeenth',
       'eighteenth',
     ],
-    portionSize: 5,
-    // portionNumber: 1,
+    portionSize: 3,
   };
 
   @action handleClickPagination = (id: number) => {
     this.storePagination.currentPage = id;
+  };
+
+  @action handleNextItem = (id = -1) => {
+    if (id === -1) {
+      this.storePagination.currentPage = 1;
+    } else {
+      this.storePagination.currentPage = this.storePagination.currentPage + id;
+    }
+  };
+
+  @action handlePrevItem = (id = -1) => {
+    id === -1
+      ? (this.storePagination.currentPage =
+          this.storePagination.currentPage - 1)
+      : (this.storePagination.currentPage = id);
+  };
+
+  @action incrementPortionSize = () => {
+    this.storePagination.portionSize = this.storePagination.portionSize + 1;
+  };
+
+  @action decrementPortionSize = () => {
+    this.storePagination.portionSize = this.storePagination.portionSize - 1;
   };
 
   @computed get countItemPagination(): number {

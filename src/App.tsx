@@ -8,7 +8,7 @@ function App() {
       <header>
         <h1
           style={{
-            color: 'brown',
+            color: 'white',
             fontSize: '48px',
           }}
         >
