@@ -12,12 +12,12 @@ function App() {
             fontSize: '48px',
           }}
         >
-          Краш тест
+          Crash test
         </h1>
       </header>
       <Main />
       <footer>
-        <span>Авторские права by Ilya Ivanchikov</span>
+        <span>Ilya Ivanchikov</span>
       </footer>
     </div>
   );
