@@ -68,7 +68,7 @@ const Main: React.FC = () => {
       handlePrevItem();
     }
   };
-  console.log(size);
+
   useEffect(() => {
     if (limitPageCount > summarySize + 300) {
       incrementPortionSize();
@@ -77,16 +77,6 @@ const Main: React.FC = () => {
     }
   }, [size, decrementPortionSize, incrementPortionSize]);
 
-  // useEffect(() => {
-  //   window.addEventListener('resize', updateWidth);
-  //   return () => {
-  //     window.removeEventListener('resize', updateWidth);
-  //   };
-  // });
-
-  // const updateWidth = () => {
-  //   setSize(window.innerWidth);
-  // };
   function useWindowSize() {
     const [size, setSize] = useState<undefined | number>(undefined);
 
