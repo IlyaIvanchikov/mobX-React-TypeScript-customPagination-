@@ -13,7 +13,7 @@ const Main: React.FC = () => {
     handleNextItem,
     handlePrevItem,
   } = mainStore;
-  const [size, setSize] = useState<number>(window.innerWidth);
+  const size = useWindowSize();
   const [summarySize, setSummarySize] = useState<number>(0);
   const namePage = storePagination.namePage;
   const currentPage = storePagination.currentPage;
@@ -41,7 +41,7 @@ const Main: React.FC = () => {
     );
   };
 
-  const limitPageCount = size / 2;
+  const limitPageCount = size! / 2;
   const handleClickRight = () => {
     const currentSign = Math.sign(countItemPagination - rightPortPageNumber);
     if (currentPage === portionSize && currentSign !== 0) {
@@ -68,26 +68,39 @@ const Main: React.FC = () => {
       handlePrevItem();
     }
   };
-
+  console.log(size);
   useEffect(() => {
     if (limitPageCount > summarySize + 300) {
       incrementPortionSize();
     } else if (limitPageCount < summarySize + 100 && portionSize > 1) {
       decrementPortionSize();
     }
-  }, [size]);
+  }, [size, decrementPortionSize, incrementPortionSize]);
 
-  useEffect(() => {
-    window.addEventListener('resize', updateWidth);
-    return () => {
-      window.removeEventListener('resize', updateWidth);
-    };
-  });
+  // useEffect(() => {
+  //   window.addEventListener('resize', updateWidth);
+  //   return () => {
+  //     window.removeEventListener('resize', updateWidth);
+  //   };
+  // });
 
-  const updateWidth = () => {
-    setSize(window.innerWidth);
-  };
+  // const updateWidth = () => {
+  //   setSize(window.innerWidth);
+  // };
+  function useWindowSize() {
+    const [size, setSize] = useState<undefined | number>(undefined);
 
+    useEffect(() => {
+      function handleResize() {
+        setSize(window.innerWidth);
+      }
+      window.addEventListener("resize", handleResize);
+      handleResize();
+      return () => window.removeEventListener("resize", handleResize);
+
+    }, []);
+    return size;
+  }
   return (
     <MainView
       handleClickLeft={handleClickLeft}

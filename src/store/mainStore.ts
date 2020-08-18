@@ -48,7 +48,7 @@ class MainStore {
   @action handlePrevItem = (id = -1) => {
     id === -1
       ? (this.storePagination.currentPage =
-          this.storePagination.currentPage - 1)
+        this.storePagination.currentPage - 1)
       : (this.storePagination.currentPage = id);
   };
 
@@ -57,7 +57,14 @@ class MainStore {
   };
 
   @action decrementPortionSize = () => {
-    this.storePagination.portionSize = this.storePagination.portionSize - 1;
+    console.log(this.storePagination.currentPage, this.storePagination.portionSize);
+    if (this.storePagination.portionSize - this.storePagination.currentPage === 0) {
+      this.storePagination.portionSize = this.storePagination.portionSize - 1;
+      this.storePagination.currentPage = this.storePagination.currentPage - 1;
+    }
+    else {
+      this.storePagination.portionSize = this.storePagination.portionSize - 1;
+    }
   };
 
   @computed get countItemPagination(): number {
